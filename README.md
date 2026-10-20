@@ -108,10 +108,6 @@ psql -U postgres -d gcc_web -f database/seed.sql
 | Admin | `admin@gcc-web.id` | `Admin#12345` |
 | Teknisi | `budi@gcc-web.id` | `Teknisi#12345` |
 
-Ganti kata sandi sebelum deploy. Untuk mode demo tanpa API, set
-`NEXT_PUBLIC_DEMO_MODE=1`; panel admin memakai kredensial yang sama dan
-menyimpan perubahan hanya di `sessionStorage`.
-
 ## Struktur
 
 ```
