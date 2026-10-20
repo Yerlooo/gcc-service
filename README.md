@@ -158,9 +158,6 @@ NEXT_PUBLIC_WHATSAPP_NUMBER=6281234567890
 NEXT_PUBLIC_DEMO_MODE=0
 ```
 
-Hanya `.env.example` yang masuk repository. Jangan commit `.env` atau token
-nyata.
-
 ## Perintah
 
 | Perintah | Fungsi |
