@@ -1,26 +1,21 @@
-# GCC Web
+# GCC Web Service
 
 Situs pemesanan dan panel operasional untuk jasa servis AC dan elektronik rumah.
-Pelanggan memilih layanan, tanggal, dan slot kedatangan; admin mengonfirmasi,
-menugaskan teknisi, mencatat pembayaran, memoderasi ulasan, dan memantau stok.
 
-**Nama produk:** GCC Web · **Domain:** `` ·
-**Database:** ``
+**Nama Aplikasi:** GCC Web · **Domain:** Belum Hosting
 
 ## Fitur
 
 **Situs publik**
 
-- Landing page editorial dengan harga awal, alur kerja, garansi, area layanan,
-  FAQ, dan ulasan.
+- Landing page editorial
 - Katalog layanan: cuci AC, isi freon, bongkar pasang AC, perbaikan kulkas,
   mesin cuci, dan TV, lengkap dengan varian harga.
 - Quick Booking empat langkah: layanan → jadwal → data pelanggan → konfirmasi.
 - Ketersediaan slot dua jam secara real time, kapasitas tiga pesanan per slot.
 - Pelacakan pesanan dengan kode `GCC-YYMMDD-XXXX`; alamat hanya terbuka setelah
   nomor WhatsApp cocok.
-- Halaman area Jakarta Selatan, Jakarta Pusat, Jakarta Barat, Depok, dan
-  Tangerang Selatan.
+- Halaman area
 - Formulir kontak yang menyusun pesan WhatsApp, halaman privasi, 404, sitemap,
   robots, manifest, dan Open Graph image.
 - JSON-LD `HVACBusiness`, `Service`, `FAQPage`, `BreadcrumbList`, dan `ItemList`.
@@ -36,7 +31,7 @@ menugaskan teknisi, mencatat pembayaran, memoderasi ulasan, dan memantau stok.
 - Manajemen harga layanan dan varian.
 - Manajemen teknisi: akun, zona, keahlian, kapasitas harian, ketersediaan, dan
   penonaktifan yang mencabut sesi.
-- Moderasi testimoni: terbitkan, sembunyikan, unggulkan, hapus.
+- Moderasi testimoni
 - Stok: barang, kategori, ambang minimum, serta mutasi masuk/keluar/penyesuaian.
 - Pengaturan identitas usaha, area layanan, dan rekening transfer.
 
@@ -47,7 +42,7 @@ menugaskan teknisi, mencatat pembayaran, memoderasi ulasan, dan memantau stok.
 - Perhitungan harga di server; browser tidak pernah mengirim harga.
 - Transaksi serializable untuk mencegah dua pesanan mengambil slot terakhir.
 - Audit log untuk perubahan status, penugasan, pembayaran, stok, dan pengaturan.
-- WhatsApp (mock/Fonnte/Wablas) dan Midtrans Snap + webhook bertanda tangan.
+- WhatsApp (mock/Fonnte/Wablas) dan Midtrans Snap + webhook bertanda tangan (**belum terintegrasi**).
 - Helmet, CORS allowlist, rate limit login/booking/tracking, validasi Zod,
   dan cookie httpOnly.
 
@@ -61,7 +56,7 @@ menugaskan teknisi, mencatat pembayaran, memoderasi ulasan, dan memantau stok.
 | Auth | JWT access/refresh, bcrypt, session rotation |
 | Integrasi | Fonnte/Wablas (WhatsApp), Midtrans Snap |
 
-## Mulai cepat
+## Kalau mau make
 
 Prasyarat: Node.js 20+, npm 10+, PostgreSQL 15+.
 
@@ -126,38 +121,6 @@ docs/
   INTEGRATIONS.md  WhatsApp dan Midtrans
 ```
 
-## Environment
-
-API (`apps/api/.env`):
-
-```env
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/gcc_web?schema=public"
-PORT=4000
-NODE_ENV=development
-WEB_ORIGIN=http://localhost:3000
-JWT_ACCESS_SECRET="<32+ byte random>"
-JWT_REFRESH_SECRET="<32+ byte random, berbeda>"
-ACCESS_TOKEN_TTL=15m
-REFRESH_TOKEN_TTL=7d
-SLOT_CAPACITY=3
-WHATSAPP_PROVIDER=mock
-WHATSAPP_API_URL=https://api.fonnte.com/send
-WHATSAPP_TOKEN=
-ADMIN_WHATSAPP=6281234567890
-MIDTRANS_SERVER_KEY=
-MIDTRANS_CLIENT_KEY=
-MIDTRANS_IS_PRODUCTION=false
-```
-
-Web (`apps/web/.env.local`):
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:4000/api
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-NEXT_PUBLIC_WHATSAPP_NUMBER=6281234567890
-NEXT_PUBLIC_DEMO_MODE=0
-```
-
 ## Perintah
 
 | Perintah | Fungsi |
@@ -181,31 +144,6 @@ NEXT_PUBLIC_DEMO_MODE=0
 - [WhatsApp dan Midtrans](docs/INTEGRATIONS.md)
 - [ERD](database/ERD.md)
 
-## Sebelum publikasi
-
-Beberapa hal di repository ini sengaja berupa contoh agar desain dan alur bisa
-ditinjau. Ganti sebelum situs dipublikasikan:
-
-- Nomor telepon, WhatsApp, email, alamat, dan jam operasional di
-  `apps/web/lib/site.ts`, pengaturan admin, dan `apps/api/prisma/seed.ts`.
-- Rekening bank; nilai seed `0000000000` hanya placeholder.
-- Nama, nomor, dan ulasan pelanggan pada data contoh.
-- Harga layanan dan kebijakan garansi.
-- Ilustrasi teknis di `apps/web/public/images/` saat ini berupa SVG buatan
-  sendiri (`manifold-gauge.svg`, `ac-cleaning.svg`, `outdoor-unit.svg`,
-  `jakarta-street.svg`) dan dilabeli sebagai ilustrasi. Ganti dengan foto asli
-  berlisensi komersial bila tersedia; sertakan kredit fotografer dan perbarui
-  teks kredit di beranda.
-- Kunci Midtrans dan token WhatsApp; biarkan kosong untuk mode manual/mock.
-- Kata sandi akun seed.
-
-Set `NEXT_PUBLIC_DEMO_MODE=0` dan `NEXT_PUBLIC_SITE_URL` ke domain HTTPS
-sebelum build produksi.
-
-## Status pengujian
-
-Belum ada automated test suite. Sebelum rilis, jalankan:
-
 ```bash
 npm install
 npm run db:generate
@@ -214,10 +152,6 @@ npm --workspace @gcc/web run typecheck
 npm run lint
 npm run build
 ```
-
-Lalu uji manual: buat pesanan, konfirmasi dan tugaskan teknisi, ubah status
-sampai selesai, tandai pembayaran, kirim testimoni, lacak pesanan, dan periksa
-tampilan pada lebar ponsel 360 px, tablet 768 px, dan desktop 1440 px.
 
 ## Lisensi
 
