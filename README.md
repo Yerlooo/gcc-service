@@ -4,8 +4,8 @@ Situs pemesanan dan panel operasional untuk jasa servis AC dan elektronik rumah.
 Pelanggan memilih layanan, tanggal, dan slot kedatangan; admin mengonfirmasi,
 menugaskan teknisi, mencatat pembayaran, memoderasi ulasan, dan memantau stok.
 
-**Nama produk:** GCC Web · **Domain:** `https://gcc-web.id` ·
-**Database:** `gcc_web`
+**Nama produk:** GCC Web · **Domain:** `` ·
+**Database:** ``
 
 ## Fitur
 
