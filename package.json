@@ -1,0 +1,26 @@
+{
+  "name": "gcc-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GCC Web — service marketplace for AC and home electronics repair.",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n web,api -c green,cyan \"npm:dev:web\" \"npm:dev:api\"",
+    "dev:web": "npm --workspace @gcc/web run dev",
+    "dev:api": "npm --workspace @gcc/api run dev",
+    "build": "npm --workspace @gcc/api run build && npm --workspace @gcc/web run build",
+    "db:generate": "npm --workspace @gcc/api run db:generate",
+    "db:migrate": "npm --workspace @gcc/api run db:migrate",
+    "db:seed": "npm --workspace @gcc/api run db:seed",
+    "db:studio": "npm --workspace @gcc/api run db:studio",
+    "lint": "npm --workspace @gcc/web run lint"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

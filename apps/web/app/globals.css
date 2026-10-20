@@ -1,0 +1,548 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bone: #f4f1ea;
+  --surface: #eae6dd;
+  --paper: #fbfaf6;
+  --ink: #101b17;
+  --muted: #5b625d;
+  --line: #cfc7b8;
+  --teal: #0b5d4f;
+  --teal-soft: #dce7e2;
+  --field: #0e1f1a;
+  --rust: #9b4a2b;
+  --amber: #a9741c;
+  --ease-stage: cubic-bezier(0.16, 0.84, 0.24, 1);
+  --ease-settle: cubic-bezier(0.32, 0.72, 0, 1);
+  --frame: 90rem;
+  --gutter: clamp(1.15rem, 4vw, 4.5rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bone);
+  color: var(--ink);
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  font-feature-settings: 'ss01' 1, 'cv11' 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--teal);
+  color: var(--bone);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--bone);
+  padding: 0.75rem 1rem;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+.frame {
+  width: 100%;
+  max-width: var(--frame);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.hairline {
+  border-color: var(--line);
+}
+
+.display {
+  font-size: clamp(2.9rem, 6.4vw, 6.1rem);
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  font-weight: 800;
+}
+
+.statement {
+  font-size: clamp(2rem, 4.2vw, 3.8rem);
+  line-height: 1.02;
+  letter-spacing: -0.038em;
+  font-weight: 750;
+}
+
+.h2 {
+  font-size: clamp(1.8rem, 3.2vw, 2.85rem);
+  line-height: 1.04;
+  letter-spacing: -0.033em;
+  font-weight: 750;
+}
+
+.meta {
+  font-size: 0.68rem;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 650;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Buttons ─────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 2.9rem;
+  padding: 0.72rem 1.05rem;
+  border: 1px solid transparent;
+  border-radius: 0;
+  font-size: 0.9rem;
+  font-weight: 650;
+  letter-spacing: -0.005em;
+  line-height: 1.1;
+  transition:
+    background-color 0.45s var(--ease-stage),
+    color 0.45s var(--ease-stage),
+    border-color 0.45s var(--ease-stage),
+    transform 0.45s var(--ease-stage);
+}
+
+.btn:active {
+  transform: scale(0.985);
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--bone);
+}
+.btn-primary:hover {
+  background: var(--teal);
+}
+
+.btn-accent {
+  background: var(--teal);
+  color: #f7fbf9;
+}
+.btn-accent:hover {
+  background: #083f36;
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+}
+.btn-ghost:hover {
+  border-color: var(--ink);
+  background: var(--paper);
+}
+
+.btn-bone {
+  background: var(--bone);
+  color: var(--ink);
+}
+.btn-bone:hover {
+  background: var(--teal-soft);
+}
+
+.btn-icon {
+  display: inline-flex;
+  height: 1.7rem;
+  width: 1.7rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  transition: transform 0.5s var(--ease-stage);
+}
+
+.btn:hover .btn-icon {
+  transform: translate(2px, -2px);
+}
+
+.btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn[disabled]:hover {
+  transform: none;
+}
+
+.link-underline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 650;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.25rem;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.6s var(--ease-stage);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ── Forms ───────────────────────────────────────────────── */
+
+/* Form controls live in the components layer so utility classes such as
+   border-l-0, py-1.5, or pr-16 can still override them per instance. */
+
+@layer components {
+  .field-label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.68rem;
+    line-height: 1.2;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    font-weight: 650;
+    color: var(--muted);
+  }
+
+  .field-input,
+  .field {
+    width: 100%;
+    min-height: 2.9rem;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    background: var(--paper);
+    padding: 0.7rem 0.85rem;
+    font-size: 0.95rem;
+    color: var(--ink);
+    transition: border-color 0.35s var(--ease-stage);
+  }
+
+  .field-input::placeholder,
+  .field::placeholder {
+    color: #8d9188;
+  }
+
+  .field-input:hover,
+  .field:hover {
+    border-color: #b7ae9d;
+  }
+
+  .field-input:focus,
+  .field:focus {
+    outline: 2px solid var(--teal);
+    outline-offset: 1px;
+    border-color: var(--teal);
+  }
+
+  .field-input[aria-invalid='true'],
+  .field[aria-invalid='true'] {
+    border-color: var(--rust);
+  }
+
+  .field-error {
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+    color: var(--rust);
+  }
+
+  .field-hint {
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  select.field-input,
+  select.field {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23101B17' stroke-width='1.4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    padding-right: 2.3rem;
+  }
+
+  .checkbox-row {
+    display: flex;
+    gap: 0.65rem;
+    align-items: flex-start;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .checkbox-row input {
+    margin-top: 0.2rem;
+    accent-color: var(--teal);
+    height: 1rem;
+    width: 1rem;
+  }
+}
+
+/* ── Ticket ──────────────────────────────────────────────── */
+
+.ticket {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.ticket-notch {
+  position: absolute;
+  top: 50%;
+  height: 1.15rem;
+  width: 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bone);
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.ticket-notch-left {
+  left: -0.6rem;
+}
+.ticket-notch-right {
+  right: -0.6rem;
+}
+
+.ticket-rule {
+  border-top: 1px dashed var(--line);
+}
+
+.ticket-code {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ticket-punch {
+  background-image: radial-gradient(circle, var(--bone) 0 34%, transparent 36%);
+  background-size: 10px 10px;
+  background-repeat: repeat-x;
+  height: 10px;
+}
+
+.perforation {
+  height: 1px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--line) 0 7px,
+    transparent 7px 13px
+  );
+}
+
+/* ── Reveal ──────────────────────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  filter: blur(6px);
+  transition:
+    opacity 0.85s var(--ease-stage),
+    transform 0.85s var(--ease-stage),
+    filter 0.85s var(--ease-stage);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Admin ledger surfaces ───────────────────────────────── */
+
+.admin-shell {
+  background: var(--bone);
+  min-height: 100dvh;
+}
+
+.admin-panel {
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.admin-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  font-weight: 650;
+  color: var(--muted);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+}
+.admin-table thead th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 650;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+.admin-table tbody td {
+  padding: 0.8rem 0.75rem;
+  border-bottom: 1px solid #e2dcd0;
+  vertical-align: top;
+}
+.admin-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.admin-table tbody tr:hover {
+  background: #f5f2eb;
+}
+
+/* Accordion */
+details.faq {
+  border-top: 1px solid var(--line);
+}
+details.faq summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  list-style: none;
+  cursor: pointer;
+  padding: 1.35rem 0;
+  font-weight: 650;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+details.faq summary::-webkit-details-marker {
+  display: none;
+}
+details.faq summary .faq-mark {
+  flex: 0 0 auto;
+  font-size: 1.1rem;
+  font-weight: 400;
+  transition: transform 0.5s var(--ease-stage);
+}
+details.faq[open] summary .faq-mark {
+  transform: rotate(45deg);
+}
+details.faq .faq-answer {
+  padding: 0 0 1.5rem;
+  max-width: 52ch;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
+/* Print a ticket */
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  body::after {
+    display: none;
+  }
+  .ticket {
+    border: 1px solid #000;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s var(--ease-stage) both;
+}

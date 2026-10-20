@@ -1,0 +1,39 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# builds
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+
+# env
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# database
+*.db
+*.sqlite
+prisma/migrations/dev/
+
+# logs
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# editors / os
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# tooling artefacts
+.taste-skill/
+coverage/
+playwright-report/
